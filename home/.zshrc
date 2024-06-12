@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Lines configured by zsh-newuser-install
 # HISTFILE=~/.histfile
 # HISTSIZE=10000
@@ -19,19 +12,35 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+autoload -Uz add-zsh-hook
 
+function reset_broken_terminal () {
+	printf '%b' '\e[0m\e(B\e)0\017\e[?5l\e7\e[0;0r\e8'
+}
+
+add-zsh-hook -Uz precmd reset_broken_terminal
+
+
+[[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
+
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp/zen.toml)"
+
+
+if [ -d "$HOME/.profile" ]; then
+  source "$HOME/.profile"
+fi
 
 if [ ! -d "$HOME/.zshrc.d" ]; then
 	mkdir -p "$HOME/.zshrc.d";
 fi
 
 for cfg in $HOME/.zshrc.d/*.zsh; do
-    . "$cfg"
+    source "$cfg"
 done
 
 if [ -d "$HOME/.zshrc.d/christitustech" ]; then
   for cfgCTT in $HOME/.zshrc.d/christitustech/*.zsh; do
-      . "$cfgCTT"
+      source "$cfgCTT"
   done
 fi
 unset -v cfg
@@ -67,23 +76,19 @@ unset -v cfgCTT
 # alias kssh="kitty +kitten ssh"
 
 
-alias rr="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
-alias cls="clear"
+# alias rr="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
+# alias cls="clear"
 
-export PATH="/home/jere/.deno/bin:$PATH"
+# export PATH="/home/jere/.deno/bin:$PATH"
 
-PATH=~/.console-ninja/.bin:$PATH
-export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
-
-eval "$(starship init zsh)"
+# PATH=~/.console-ninja/.bin:$PATH
+# export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
 
 # alias ls="ls --color"
 
 # Created by `pipx` on 2024-03-20 14:37:10
-export PATH="/home/jere/.local/bin:$PATH"
+# export PATH="/home/jere/.local/bin:$PATH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)

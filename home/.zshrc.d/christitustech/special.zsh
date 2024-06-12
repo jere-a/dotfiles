@@ -4,12 +4,12 @@
 
 # Use the best version of pico installed
 edit() {
-	if [[ $(type -t jpico) == "file" ]] || ([[ $(type -t jpico) == "alias" ]] && [[ -n $(which jpico) ]]); then
+	if [[ $(type jpico) == "file" ]] || ([[ $(type jpico) == "alias" ]] && [[ -n $(which jpico) ]]); then
 		# Use JOE text editor http://joe-editor.sourceforge.net/
 		jpico -nonotice -linums -nobackups "$@"
-	elif [[ $(type -t nano) == "file" ]] || ([[ $(type -t nano) == "alias" ]] && [[ -n $(which nano) ]]); then
+	elif [[ $(type nano) == "file" ]] || ([[ $(type nano) == "alias" ]] && [[ -n $(which nano) ]]); then
 		nano -c "$@"
-	elif [[ $(type -t pico) == "file" ]] || ([[ $(type -t pico) == "alias" ]] && [[ -n $(which pico) ]]); then
+	elif [[ $(type pico) == "file" ]] || ([[ $(type pico) == "alias" ]] && [[ -n $(which pico) ]]); then
 		pico "$@"
 	else
 		nvim "$@"
