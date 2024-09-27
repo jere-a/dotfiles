@@ -1,5 +1,5 @@
-export EDITOR=nano
-export VISUAL=nano
+export EDITOR=nvim
+export VISUAL=nvim
 alias pico='edit'
 alias spico='sedit'
 alias nano='edit'

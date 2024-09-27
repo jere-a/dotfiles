@@ -34,3 +34,10 @@ set_path "$HOME/.cargo/bin"
 set_path "/var/lib/flatpak/exports/bin"
 set_path "/.local/share/flatpak/exports/bin"
 set_path "$HOME/.deno/bin"
+set_path "$HOME/flutter-sdk/flutter/bin"
+set_path "$HOME/go/bin"
+
+export GTK_THEME=Adwaita:dark
+export GTK2_RC_FILES="/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc"
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+export SUDO_PROMPT="$(tput setab 1 setaf 7 bold)[sudo]$(tput sgr0) $(tput setaf 6)password for$(tput sgr0) $(tput setaf 5)%p$(tput sgr0): "

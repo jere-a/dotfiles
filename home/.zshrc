@@ -1,3 +1,5 @@
+zmodload zsh/zprof
+
 # Lines configured by zsh-newuser-install
 # HISTFILE=~/.histfile
 # HISTSIZE=10000
@@ -8,8 +10,15 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/jere/.zshrc'
 
-autoload -Uz compinit
-compinit
+#autoload -Uz compinit && compinit -d
+
+autoload -Uz compinit 
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
 # End of lines added by compinstall
 
 autoload -Uz add-zsh-hook
@@ -92,3 +101,12 @@ unset -v cfgCTT
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+
+
+# pnpm
+export PNPM_HOME="/home/jere/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm End
