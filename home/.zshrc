@@ -1,4 +1,92 @@
-zmodload zsh/zprof
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="amuse"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Lines configured by zsh-newuser-install
 # HISTFILE=~/.histfile
@@ -7,10 +95,7 @@ zmodload zsh/zprof
 setopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/jere/.zshrc'
-
-#autoload -Uz compinit && compinit -d
 
 autoload -Uz compinit 
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
@@ -19,21 +104,15 @@ else
 	compinit -C;
 fi;
 
-# End of lines added by compinstall
-
 autoload -Uz add-zsh-hook
 
 function reset_broken_terminal () {
 	printf '%b' '\e[0m\e(B\e)0\017\e[?5l\e7\e[0;0r\e8'
 }
-
 add-zsh-hook -Uz precmd reset_broken_terminal
 
-
 [[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
-
-eval "$(oh-my-posh init zsh --config $HOME/.config/omp/zen.toml)"
-
+# eval "$(oh-my-posh init zsh --config $HOME/.config/omp/zen.toml)"
 
 if [ -d "$HOME/.profile" ]; then
   source "$HOME/.profile"
@@ -46,62 +125,10 @@ fi
 for cfg in $HOME/.zshrc.d/*.zsh; do
     source "$cfg"
 done
-
-if [ -d "$HOME/.zshrc.d/christitustech" ]; then
-  for cfgCTT in $HOME/.zshrc.d/christitustech/*.zsh; do
-      source "$cfgCTT"
-  done
-fi
 unset -v cfg
-unset -v cfgCTT
-
-#######################################################
-# MACHINE SPECIFIC ALIAS'S
-#######################################################
-
-# Alias's for SSH
-# alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
-
-# Alias's to change the directory
-# alias web='cd /var/www/html'
-
-# Alias's to mount ISO files
-# mount -o loop /home/NAMEOFISO.iso /home/ISOMOUNTDIR/
-# umount /home/NAMEOFISO.iso
-# (Both commands done as root only.)
-
-#######################################################
-# GENERAL ALIAS'S
-#######################################################
-# To temporarily bypass an alias, we precede the command with a \
-# EG: the ls command is aliased, but to use the normal ls command you would type \ls
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# KITTY - alias to be able to use kitty features when connecting to remote servers(e.g use tmux on remote server)
-
-# alias kssh="kitty +kitten ssh"
-
-
-# alias rr="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
-# alias cls="clear"
-
-# export PATH="/home/jere/.deno/bin:$PATH"
-
-# PATH=~/.console-ninja/.bin:$PATH
-# export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
-
-# alias ls="ls --color"
-
-# Created by `pipx` on 2024-03-20 14:37:10
-# export PATH="/home/jere/.local/bin:$PATH"
-
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
-
 
 # pnpm
 export PNPM_HOME="/home/jere/.local/share/pnpm"
@@ -110,3 +137,18 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm End
+
+# Compilation flags
+# export ARCHFLAGS="-arch $(uname -m)"
+
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
