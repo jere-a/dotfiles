@@ -1,0 +1,65 @@
+
+[window]
+title = "Alacritty"
+decorations = "none"
+blur = true
+opacity = 0.9
+padding.x = 10
+padding.y = 10
+
+[window.dimensions]
+columns = 160
+lines = 80
+
+[cursor.style]
+shape= "Beam"
+blinking = "Never"
+
+[colors]
+transparent_background_colors = true
+draw_bold_text_with_bright_colors = true
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+#glyph_offset = { x = 1, y = 0 }
+normal.family = "FiraCode Nerd Font"
+#normal.style = "Regular"
+size = 10.0
+
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]
+
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "code", args = [ "--goto" ] }
+mouse = { enabled = true }
+
+[general]
+live_config_reload = true
+working_directory = "None"
+
+# Themes --
+import = [ 
+  # -- Themes --
+  "~/.config/alacritty/themes/themes/terminal_app.toml",
+  "~/.config/alacritty/halloween.toml"
+  #"~/.config/alacritty/catppuccin-macchiato.toml", 
+  #"~/.config/alacritty/nordic.toml", 
+  # "~/.config/alacritty/xcad.toml",
+  # "~/.config/alacritty/dracula.toml",
+  # "~/.config/alacritty/catppuccin-mocha.toml",
+  # "~/.config/alacritty/solarized_dark.toml",
+  # "~/.config/alacritty/solarized-osaka.toml",
+]

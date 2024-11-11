@@ -1,0 +1,7 @@
+local function display_bitrate()
+    local bitrate_video = mp.get_property_number("video-bitrate", 0) / 1000
+    local bitrate_audio = mp.get_property_number("audio-bitrate", 0) / 1000
+    mp.osd_message(string.format("Video Bitrate: %.2f kbps\nAudio Bitrate: %.2f kbps", bitrate_video, bitrate_audio))
+end
+
+mp.add_periodic_timer(0.1, display_bitrate)

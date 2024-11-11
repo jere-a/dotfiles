@@ -27,17 +27,14 @@ set_path(){
 # export PATH="/home/jere/.local/bin:$PATH"
 
 # export PATH=$PATH:$HOME/.local/bin
-
-set_path "$HOME/.console-ninja/.bin"
-set_path "$HOME/.local/bin"
-set_path "$HOME/.cargo/bin"
-set_path "/var/lib/flatpak/exports/bin"
-set_path "/.local/share/flatpak/exports/bin"
-set_path "$HOME/.deno/bin"
-set_path "$HOME/flutter-sdk/flutter/bin"
-set_path "$HOME/go/bin"
+set_path "$HOME/go/bin" "$HOME/flutter-sdk/flutter/bin" "$HOME/.deno/bin" "/.local/share/flatpak/exports/bin" "/var/lib/flatpak/exports/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.console-ninja/.bin"
 
 export GTK_THEME=Adwaita:dark
 export GTK2_RC_FILES="/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc"
 export QT_STYLE_OVERRIDE=Adwaita-Dark
 export SUDO_PROMPT="$(tput setab 1 setaf 7 bold)[sudo]$(tput sgr0) $(tput setaf 6)password for$(tput sgr0) $(tput setaf 5)%p$(tput sgr0): "
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+
+source "$HOME/.zshrc.d/christitustech/editor.zsh"
+source "$HOME/.zshrc.d/christitustech/colors.zsh"
+source "$HOME/.zshrc.d/christitustech/special.zsh"

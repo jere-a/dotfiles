@@ -11,3 +11,4 @@ PS1='[\u@\h \W]\$ '
 [ -r /home/jere/.byobu/prompt ] && . /home/jere/.byobu/prompt   #byobu-prompt#
 
 PATH=~/.console-ninja/.bin:$PATH
+. "/home/jere/.deno/env"
