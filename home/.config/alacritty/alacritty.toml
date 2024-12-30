@@ -54,7 +54,8 @@ working_directory = "None"
 import = [ 
   # -- Themes --
   "~/.config/alacritty/themes/themes/terminal_app.toml",
-  "~/.config/alacritty/halloween.toml"
+  "~/.config/alacritty/christmas.toml"
+  # "~/.config/alacritty/halloween.toml"
   #"~/.config/alacritty/catppuccin-macchiato.toml", 
   #"~/.config/alacritty/nordic.toml", 
   # "~/.config/alacritty/xcad.toml",

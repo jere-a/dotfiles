@@ -1,4 +1,4 @@
-export DESKTOP_ENV="hyprland"
+export DESKTOP_ENV="null"
 
 # AutoStart startx
 if [ "$DESKTOP_ENV" = "startx" ] && [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
@@ -8,7 +8,6 @@ fi
 
 # Auto start Hyprland on tty1
 if [ "$DESKTOP_ENV" = "hyprland" ] && [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  mkdir -p ~/.cache
   exec Hyprland > ~/.cache/hyprland.log 2>&1
 fi
 
