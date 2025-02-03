@@ -1,19 +1,23 @@
-set_path(){
+update_path_variable() {
+  # Check if user id is 1000 or higher
+  if [ "$(id -u)" -ge 1000 ]; then
+    for directory in "$@"; do
+      # Check if the directory exists
+      if [ ! -d "$directory" ]; then
+        continue
+      fi
 
-    # Check if user id is 1000 or higher
-    [ "$(id -u)" -ge 1000 ] || return
+      # Check if it is already in your $PATH.
+      if [[ "$PATH" == *"$directory"* ]]; then
+        continue
+      fi
 
-    for i in "$@";
-    do
-        # Check if the directory exists
-        [ -d "$i" ] || continue
-
-        # Check if it is not already in your $PATH.
-        echo "$PATH" | grep -Eq "(^|:)$i(:|$)" && continue
-
-        # Then append it to $PATH and export it
-        export PATH="${PATH}:$i"
+      # Then append it to $PATH and export it
+      PATH=$PATH:$directory
     done
+  else
+    echo "Error: User ID must be 1000 or higher."
+  fi
 }
 
 # export PATH="/home/jere/.deno/bin:$PATH"
@@ -27,13 +31,17 @@ set_path(){
 # export PATH="/home/jere/.local/bin:$PATH"
 
 # export PATH=$PATH:$HOME/.local/bin
-set_path "$HOME/go/bin" "$HOME/flutter-sdk/flutter/bin" "$HOME/.deno/bin" "/.local/share/flatpak/exports/bin" "/var/lib/flatpak/exports/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.console-ninja/.bin"
+update_path_variable "$HOME/go/bin" "$HOME/flutter-sdk/flutter/bin" "$HOME/.deno/bin" "/.local/share/flatpak/exports/bin" "/var/lib/flatpak/exports/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.console-ninja/.bin"
 
-export GTK_THEME=Adwaita:dark
+export GTK_THEME=Arc:darker
 export GTK2_RC_FILES="/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc"
-export QT_STYLE_OVERRIDE=Adwaita-Dark
+export QT_STYLE_OVERRIDE=Arc-Darker
 export SUDO_PROMPT="$(tput setab 1 setaf 7 bold)[sudo]$(tput sgr0) $(tput setaf 6)password for$(tput sgr0) $(tput setaf 5)%p$(tput sgr0): "
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+export IPFS_PATH="$XDG_DATA_HOME"/ipfs
+export MINETEST_USER_PATH="$XDG_DATA_HOME"/luanti
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
+export W3M_DIR="$XDG_STATE_HOME/w3m"
 
 source "$HOME/.zshrc.d/christitustech/editor.zsh"
 source "$HOME/.zshrc.d/christitustech/colors.zsh"
