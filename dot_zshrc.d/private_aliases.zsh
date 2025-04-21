@@ -6,4 +6,4 @@ alias open="xdg-open"
 # global
 
 
-source "$HOME/.zshrc.d/christitustech/aliases.zsh"
+compile_then_source source "$HOME/.zshrc.d/christitustech/aliases.zsh"

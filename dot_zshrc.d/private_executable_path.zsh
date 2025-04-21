@@ -43,6 +43,8 @@ export MINETEST_USER_PATH="$XDG_DATA_HOME"/luanti
 export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 export W3M_DIR="$XDG_STATE_HOME/w3m"
 
-source "$HOME/.zshrc.d/christitustech/editor.zsh"
-source "$HOME/.zshrc.d/christitustech/colors.zsh"
-source "$HOME/.zshrc.d/christitustech/special.zsh"
+export EDITOR=nvim
+export VISUAL=nvim
+export SUDO_EDITOR=nvim
+
+compile_then_source source "$HOME/.zshrc.d/christitustech/special.zsh"

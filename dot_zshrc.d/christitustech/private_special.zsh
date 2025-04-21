@@ -2,21 +2,6 @@
 # SPECIAL FUNCTIONS
 #######################################################
 
-# Use the best version of pico installed
-edit() {
-	if [[ $(type jpico) == "file" ]] || ([[ $(type jpico) == "alias" ]] && [[ -n $(which jpico) ]]); then
-		# Use JOE text editor http://joe-editor.sourceforge.net/
-		jpico -nonotice -linums -nobackups "$@"
-	elif [[ $(type nano) == "file" ]] || ([[ $(type nano) == "alias" ]] && [[ -n $(which nano) ]]); then
-		nano -c "$@"
-	elif [[ $(type pico) == "file" ]] || ([[ $(type pico) == "alias" ]] && [[ -n $(which pico) ]]); then
-		pico "$@"
-	else
-		nvim "$@"
-	fi
-}
-
-
 # Extracts any archive(s) (if unp isn't installed)
 extract() {
 	for archive in "$@"; do
@@ -111,60 +96,6 @@ up() {
 	fi
 	cd $d
 }
-
-
-#Automatically do an ls after each cd
-# cd ()
-# {
-# 	if [ -n "$1" ]; then
-# 		builtin cd "$@" && ls
-# 	else
-# 		builtin cd ~ && ls
-# 	fi
-# }
-
-
-# Show current network information
-netinfo() {
-	echo "--------------- Network Information ---------------"
-	/sbin/ifconfig | awk /'inet addr/ {print $2}'
-	echo ""
-	/sbin/ifconfig | awk /'Bcast/ {print $3}'
-	echo ""
-	/sbin/ifconfig | awk /'inet addr/ {print $4}'
-
-	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
-	echo "---------------------------------------------------"
-}
-
-
-# IP address lookup
-alias whatismyip="whatsmyip"
-function whatsmyip() {
-	# Dumps a list of all IP addresses for every device
-	# /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
-
-	### Old commands
-	# Internal IP Lookup
-	#echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
-	#
-	#	# External IP Lookup
-	#echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
-
-	# Internal IP Lookup.
-	if [ -e /sbin/ip ]; then
-		echo -n "Internal IP: "
-		/sbin/ip addr show wlan0 | grep "inet " | awk -F: '{print $1}' | awk '{print $2}'
-	else
-		echo -n "Internal IP: "
-		/sbin/ifconfig wlan0 | grep "inet " | awk -F: '{print $1} |' | awk '{print $2}'
-	fi
-
-	# External IP Lookup
-	echo -n "External IP: "
-	curl -s ifconfig.me
-}
-
 
 # For some reason, rot13 pops up everywhere
 rot13() {
