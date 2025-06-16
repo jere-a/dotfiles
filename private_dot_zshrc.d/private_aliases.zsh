@@ -3,6 +3,7 @@ alias cls="clear"
 alias npm="pnpm"
 alias open="xdg-open"
 
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 # global
 
 

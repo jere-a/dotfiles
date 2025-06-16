@@ -3,17 +3,13 @@ if [[ ":$FPATH:" != *":/home/jere/.zsh/completions:"* ]]; then export FPATH="/ho
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-compile_then_source() {
+eval "$(antidot init)"
+
+function compile_then_source() {
   local method=$1       # '.' or 'source'
   local file=$2         # file to source
   shift 2
   local args=("$@")     # remaining args passed to the sourced file
-
-  # Bash compatibility
-  if [[ $BASH_VERSION ]]; then
-    eval builtin "$method" "$file" "${args[@]@Q}"
-    return $?
-  fi
 
   # Zsh: check if .zwc is missing or outdated
   if [[ ! $file.zwc -nt $file ]]; then
@@ -239,3 +235,9 @@ tmuxn() {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/jere/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/jere/.config/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

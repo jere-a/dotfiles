@@ -31,7 +31,7 @@ update_path_variable() {
 # export PATH="/home/jere/.local/bin:$PATH"
 
 # export PATH=$PATH:$HOME/.local/bin
-update_path_variable "$HOME/go/bin" "$HOME/flutter-sdk/flutter/bin" "$HOME/.deno/bin" "/.local/share/flatpak/exports/bin" "/var/lib/flatpak/exports/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.console-ninja/.bin"
+update_path_variable "$HOME/go/bin" "$HOME/flutter-sdk/flutter/bin" "$HOME/.deno/bin" "$HOME/.local/share/flatpak/exports/bin" "/var/lib/flatpak/exports/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/.console-ninja/.bin"
 
 export GTK_THEME=Arc:darker
 export GTK2_RC_FILES="/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc"
@@ -42,6 +42,11 @@ export IPFS_PATH="$XDG_DATA_HOME"/ipfs
 export MINETEST_USER_PATH="$XDG_DATA_HOME"/luanti
 export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 export W3M_DIR="$XDG_STATE_HOME/w3m"
+
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+
+export NODE_COMPILE_CACHE=~/.cache/nodejs-compile-cache
 
 export EDITOR=nvim
 export VISUAL=nvim
