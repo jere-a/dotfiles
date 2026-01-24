@@ -1,0 +1,83 @@
+context.modules = [
+    {
+        name = libpipewire-module-filter-chain,
+        flags = [ nofail ],
+        args = {
+            node.description = "Virtual 2.1 → Stereo (Z333)",
+            media.name       = "Virtual 2.1 → Stereo",
+
+            filter.graph = {
+                nodes = [
+                    # Input copies
+                    { type = builtin, label = copy, name = copyFL  }
+                    { type = builtin, label = copy, name = copyFR  }
+                    { type = builtin, label = copy, name = copyLFE }
+
+                    # Stereo mixer (everything ends up here)
+                    { type = builtin, label = mixer, name = mixStereo }
+
+                    # Duplicate stereo mix to FL / FR outputs
+                    { type = builtin, label = copy, name = copyOutL }
+                    { type = builtin, label = copy, name = copyOutR }
+
+                    # LFE processing
+                    {
+                        type    = builtin
+                        label   = bq_lowpass
+                        name    = lpLFE
+                        control = { "Freq" = 140.0 }
+                    }
+
+                    {
+                        type    = builtin
+                        label   = mixer
+                        name    = mixLFE
+                        control = {
+                            "Gain 1" = 0.7
+                            "Gain 2" = 0.7
+                        }
+                    }
+                ]
+
+                links = [
+                    # Stereo path
+                    { output = "copyFL:Out", input = "mixStereo:In 1" }
+                    { output = "copyFR:Out", input = "mixStereo:In 2" }
+
+                    # LFE path
+                    { output = "copyLFE:Out", input = "lpLFE:In" }
+                    { output = "lpLFE:Out",   input = "mixLFE:In 1" }
+                    { output = "lpLFE:Out",   input = "mixLFE:In 2" }
+
+                    # Fold LFE into stereo
+                    { output = "mixLFE:Out", input = "mixStereo:In 3" }
+
+                    # Split stereo mix to hardware L/R
+                    { output = "mixStereo:Out", input = "copyOutL:In" }
+                    { output = "mixStereo:Out", input = "copyOutR:In" }
+                ]
+
+                inputs  = [ "copyFL:In" "copyFR:In" "copyLFE:In" ]
+                outputs = [ "copyOutL:Out" "copyOutR:Out" ]
+            }
+
+            # What apps see
+            capture.props = {
+                node.name      = "virtual_2_1_sink"
+                media.class    = Audio/Sink
+                audio.channels = 3
+                audio.position = [ FL FR LFE ]
+            }
+
+            # What hardware gets
+            playback.props = {
+                node.name      = "stereo_hardware_out"
+                node.passive   = true
+                stream.dont-remix = true
+                audio.channels = 2
+                audio.position = [ FL FR ]
+            }
+        }
+    }
+]
+

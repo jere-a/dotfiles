@@ -24,27 +24,27 @@ alias rm='rm -Iv --one-file-system --preserve-root'
 
 
 
-# function checks if the application is installed
 function __add_command_replace_alias() {
-    if [ -x "`which $2 2>&1`" ]; then
-        alias $1=$2
-    fi
+    local alias_name=$1
+    local command=$2
+    
+    command -v "$command" >/dev/null 2>&1 && alias "$alias_name"="$command"
 }
 
-if [ -x "`which most 2>&1`" ]; then
+if command -v most >/dev/null 2>&1; then
     alias less=most
     export PAGER=most
 fi
 
-if [ -x "`which nvim 2>&1`" ]; then
-        export EDITOR=nvim
+if command -v nvim >/dev/null 2>&1; then
+    export EDITOR=nvim
 fi
 
-__add_command_replace_alias tail 'multitail'
-__add_command_replace_alias df 'pydf'
-__add_command_replace_alias traceroute 'mtr'
-__add_command_replace_alias tracepath 'mtr'
-__add_command_replace_alias top 'htop'
+__add_command_replace_alias tail multitail
+__add_command_replace_alias df pydf
+__add_command_replace_alias traceroute mtr
+__add_command_replace_alias tracepath mtr
+__add_command_replace_alias top htop
 
 function allcolors() {
     # credit to http://askubuntu.com/a/279014
