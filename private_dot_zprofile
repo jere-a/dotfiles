@@ -15,5 +15,7 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 6 ]; then
   exec gamescope -e -- /usr/bin/steam -tenfoot
 fi
 
+export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
 # Created by `pipx` on 2024-03-20 14:37:10
 export PATH="$PATH:/home/jere/.local/bin"

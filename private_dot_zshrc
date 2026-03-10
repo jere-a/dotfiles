@@ -1,10 +1,15 @@
+export ZELLIJ_AUTO_ATTACH=true
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  eval "$(zellij setup --generate-auto-start zsh)"
+fi
+
 add_to_fpath() {
   local dir="$1"
   [[ ":$FPATH:" != *":$dir:"* ]] && export FPATH="$dir:$FPATH"
 }
 
 add_to_fpath "/home/jere/.zsh/completions"
-eval "$(antidot init)"
 
 precmd () { echo -n "\x1b]1337;CurrentDir=$(pwd)\x07" }
 
@@ -97,7 +102,7 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zoxide fzf safe-paste sudo colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zoxide fzf safe-paste sudo colored-man-pages podman zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -225,8 +230,13 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 [[ -s "/home/jere/.bun/_bun" ]] && source "/home/jere/.bun/_bun"
 
-export BUN_INSTALL="$HOME/.bun"
+export BUN_INSTALL="$XDG_DATA_HOME"/bun
 add_to_path "$BUN_INSTALL/bin"
+
+export CARGO_HOME="$XDG_DATA_HOME/.local/share/cargo"
 
 alias jrnl=" jrnl"
 
+
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+export PATH="$HOME/.npm-global/bin:$PATH"

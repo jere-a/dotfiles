@@ -37,3 +37,9 @@ vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 -- LSP Server to use for Python.
 -- Set to "basedpyright" to use basedpyright instead of pyright.
 vim.g.lazyvim_python_lsp = "basedpyright"
+
+vim.g.mkdp_open_to_the_world = 1
+vim.g.mkdp_open_ip = "127.0.0.1"
+vim.g.mkdp_port = 8407
+vim.g.mkdp_browser = "none"
+vim.g.mkdp_echo_preview_url = 1

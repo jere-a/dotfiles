@@ -3,20 +3,21 @@ return {
   opts = {
     servers = {
       biome = {},
+      cssls = {},
       --tsserver = false,
       --ts_ls = false,
-      denols = {},
+      --denols = {},
       hyprls = {},
-      harper_ls = {
-        settings = {
-          ["harper-ls"] = {
-            linters = {
-              SentenceCapitalization = false,
-              SpellCheck = false,
-            },
-          },
-        },
-      },
+      --harper_ls = {
+      --  settings = {
+      --    ["harper-ls"] = {
+      --      linters = {
+      --        SentenceCapitalization = false,
+      --        SpellCheck = false,
+      --      },
+      --    },
+      --  },
+      --},
     },
   },
 }
