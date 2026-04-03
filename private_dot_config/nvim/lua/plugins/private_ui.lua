@@ -31,6 +31,9 @@ return {
     event = "VeryLazy",
     opts = {
       -- add options here
+      drag_and_drop = {
+        insert_mode = true,
+      },
       -- or leave it empty to use the default settings
     },
     keys = {
@@ -51,10 +54,9 @@ return {
       ]]
     end,
   },
-  { 
-    "wakatime/vim-wakatime", 
+  {
+    "wakatime/vim-wakatime",
     lazy = false,
     event = "VeryLazy",
   },
 }
-
