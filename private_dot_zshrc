@@ -1,3 +1,12 @@
+if ! grep -q 'fish' /proc/$PPID/comm && [[ $SHLVL == <-> && $SHLVL -le 2 ]]; then
+  if [[ -o login ]]; then
+    LOGIN_OPTION="--login"
+  else
+    LOGIN_OPTION=""
+  fi
+  exec fish $LOGIN_OPTION
+fi
+
 export ZELLIJ_AUTO_ATTACH=true
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
@@ -244,3 +253,5 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 # OpenClaw Completion
 source "/home/jere/.openclaw/completions/openclaw.zsh"
+
+source /home/jere/.config/broot/launcher/bash/br
