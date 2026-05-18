@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 return {
   "NickvanDyke/opencode.nvim",
   event = "VeryLazy",
@@ -43,4 +47,3 @@ return {
     vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
   end,
 }
-

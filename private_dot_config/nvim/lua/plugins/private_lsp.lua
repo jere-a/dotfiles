@@ -2,12 +2,18 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
-      biome = {},
       cssls = {},
-      --tsserver = false,
-      --ts_ls = false,
-      --denols = {},
+      tsserver = {
+        enable = false,
+      },
+      ts_ls = {
+        enable = false,
+      },
+      vtsls = {
+        enable = false,
+      },
       hyprls = {},
+      ty = {},
       --harper_ls = {
       --  settings = {
       --    ["harper-ls"] = {
@@ -18,6 +24,20 @@ return {
       --    },
       --  },
       --},
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    ---@type conform.setupOpts
+    opts = {
+      formatters_by_ft = {
+        javascript = { "oxfmt" },
+        javascriptreact = { "oxfmt" },
+        typescript = { "oxfmt" },
+        typescriptreact = { "oxfmt" },
+        json = { "oxfmt" },
+        vue = { "oxfmt" },
+      },
     },
   },
 }
