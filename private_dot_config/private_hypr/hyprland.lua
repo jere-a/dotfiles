@@ -76,6 +76,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start waybar.service")
 	hl.exec_cmd("systemctl --user start xsettingsd.service")
 
+	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Amber 24")
+
 	for _, app in ipairs(autostart_apps) do
 		local flag = app.type == "background" and "-s b" or ""
 		hl.exec_cmd(uwsm_cmd .. flag .. " -- " .. app.cmd)
@@ -261,16 +263,6 @@ hl.config({
 	},
 })
 
------------------
----- DEBUG ------
------------------
-
-hl.config({
-	debug = {
-		disable_logs = true,
-	},
-})
-
 ---------------
 ---- INPUT ----
 ---------------
@@ -278,8 +270,8 @@ hl.config({
 hl.config({
 	input = {
 		kb_layout = "fi",
-		kb_variant = "",
-		kb_model = "",
+		kb_variant = "nodeadkeys",
+		kb_model = "pc105",
 		kb_options = "",
 		kb_rules = "evdev",
 

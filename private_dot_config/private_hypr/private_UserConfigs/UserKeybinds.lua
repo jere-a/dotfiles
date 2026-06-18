@@ -55,6 +55,7 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(lock_cmd))
 
 -- Toggle control center
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP='gnome' gnome-control-center"))
 
 -- Screenshot
 hl.bind(

@@ -7,7 +7,7 @@ fish_add_path --append $HOME/flutter-sdk/flutter/bin
 fish_add_path --append $HOME/.deno/bin
 fish_add_path --append $HOME/.local/share/flatpak/exports/bin
 fish_add_path --append /var/lib/flatpak/exports/bin
-fish_add_path --append $HOME/.cargo/bin
+fish_add_path --append $HOME/.local/share/cargo/bin
 fish_add_path --append $HOME/.local/bin
 fish_add_path --append $HOME/.console-ninja/.bin
 fish_add_path --append $BUN_INSTALL/bin
